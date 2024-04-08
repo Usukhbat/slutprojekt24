@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Characters {
     private final String name;
     private int health;
@@ -15,12 +17,8 @@ public class Characters {
         this.specialDefense = specialDefense;
         this.speed = speed;
     }
-    public String getName(){
-        return name;
-    }
-    public int getHealth(){
-        return health;
-    }
+    public String getName(){ return name; }
+    public int getHealth(){ return health; }
     public int getAttack(){
         return attack;
     }
@@ -46,5 +44,16 @@ public class Characters {
         System.out.println("Special Attack: "+this.specialAttack);
         System.out.println("Special Defense: "+this.specialDefense);
         System.out.println("Speed: "+this.speed);
+    }
+    public void dealDamage(int damage, int value){
+        int totalDamage = damage+value;
+        this.health = this.health-totalDamage;
+        System.out.println(this.health);
+    }
+    public void currentMatch(){
+        System.out.println(this.name+": "+this.health);
+    }
+    public void matchSummary(){
+        System.out.println(this.name+" won!");
     }
 }
