@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class Arena { // this class is for the game, where you can choose your class, your enemy, and the main fighting ssytem is here as well-
+public class Arena { // this class is for the game, where you can choose your class, your enemy, and the main fighting system is here as well-
 
     public Arena(){
         Random random = new Random();    // all the codes before the while loop is the 'main menu'/'lobby' of the game, will expand upon it further
@@ -20,7 +20,7 @@ public class Arena { // this class is for the game, where you can choose your cl
                     while(player.getHealth() > 0 && enemy.getHealth() > 0) {
                         System.out.println("[" + player.getName() + " VS " + enemy.getName() + "]\n1. Normal Attack\n2. Special Attack\n3. Go back");
                         choice = scan.nextInt();
-                        int report = 0;
+                        int report;
                         switch (choice) {  // this is another enhanced switch case for managing the attacks of each fighter, both the player and enemy.
                             case 1 -> { // the normal attacks of the player
                                 enemy.dealDamage(player.getName(), player.getAttack(), value);
@@ -43,7 +43,7 @@ public class Arena { // this class is for the game, where you can choose your cl
                         }
                     }
                 }
-                case 2 -> { // case for ending the fight, i will code further enabling you to return to the 'main menu' but for now this is all.
+                case 2 -> { // case for ending the fight, I will code further enabling you to return to the 'main menu' but for now this is all.
                     System.out.println("Embarrassing!");
                     game = false;
                 }
