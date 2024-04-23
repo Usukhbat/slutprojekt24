@@ -1,53 +1,70 @@
+import java.sql.SQLOutput;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Arena { // this class is for the game, where you can choose your class, your enemy, and the main fighting system is here as well-
-
-    public Arena(){
+    public Arena(HashMap<Integer, Characters> classes){
         Random random = new Random();    // all the codes before the while loop is the 'main menu'/'lobby' of the game, will expand upon it further
         int value = random.nextInt(1, 6);
         Scanner scan = new Scanner(System.in);
-        Knight player = new Knight("Ben",100,10,10,10,10,10);
-        Characters enemy = new Characters("Dan",100,10,10,10,10,10);
+        Characters player = new Characters("Patrick",100,10,10,10,10);
         System.out.println("Welcome to the Arena!");
-        boolean game = true;
-        while (game){            // this while loop contains the fighting part of the program.
-            System.out.println("Write 1 or 2 to choose your next action.");
-            System.out.print("1. Fight\n2. Surrender\nWrite here: ");
-            int choice = scan.nextInt();
-            switch (choice){          // uses an enhanced switch case to maneuver and do tasks around the program with inputs from Scanner.
-                case 1 -> {
-                    while(player.getHealth() > 0 && enemy.getHealth() > 0) {
-                        System.out.println("[" + player.getName() + " VS " + enemy.getName() + "]\n1. Normal Attack\n2. Special Attack\n3. Go back");
-                        choice = scan.nextInt();
-                        int report;
-                        switch (choice) {  // this is another enhanced switch case for managing the attacks of each fighter, both the player and enemy.
-                            case 1 -> { // the normal attacks of the player
-                                enemy.dealDamage(player.getName(), player.getAttack(), value);
-                                player.currentMatch(player.getName(), player.getHealth(), enemy.getName(), enemy.getHealth());
-                                report = enemy.winCondition(player.getHealth(), enemy.getHealth());
-                                enemy.matchEnd(report); //
-                            }
-                            case 2 -> { // the special attacks of the player
-                                enemy.dealDamage(player.getName(), player.getSpecialAttack(), value);
-                                player.currentMatch(player.getName(), player.getHealth(), enemy.getName(), enemy.getHealth());
-                                report = enemy.winCondition(player.getHealth(), enemy.getHealth());
-                                enemy.matchEnd(report);
-                            }
-                            default -> {
-                                player.dealDamage(enemy.getName(), enemy.getSpecialAttack(), value);
-                                player.currentMatch(player.getName(), player.getHealth(), enemy.getName(), enemy.getHealth());
-                                report = player.winCondition(player.getHealth(), enemy.getHealth());
-                                player.matchEnd(report);
+        boolean fight = true;
+        try {
+            System.out.println("Choose your enemy! (Write 1, 2, 3, or 4 to choose.)");
+            System.out.print("1. Karl the Knight\n2. Aaron the Archer\n3. Markus the Mage\n4. Robert the Rogue\nWrite here: ");
+            int enemyChoice = scan.nextInt();
+            while (fight){            // this while loop contains the fighting part of the program.
+                enemyChoice--;
+                try{
+                    System.out.println("[" + player.getName() + " VS " + classes.get(enemyChoice).getName() + "]");
+                    System.out.println("(Write 1 or 2 to choose your next action.)");
+                    System.out.print("1. Fight\n2. Surrender\nWrite here: ");
+                    int choice = scan.nextInt();
+                    switch (choice){          // uses an enhanced switch case to maneuver and do tasks around the program with inputs from Scanner.
+                        case 1 -> {
+                            while(player.getHealth() > 0 && classes.get(enemyChoice).getHealth() > 0) {
+                                try{
+                                    System.out.println("[" + player.getName() + " VS " + classes.get(enemyChoice).getName() + "]");
+                                    System.out.print("1. Normal Attack\n2. Special Attack\nWrite here: ");
+                                    choice = scan.nextInt();
+                                    int report;
+                                    switch (choice) {  // this is another enhanced switch case for managing the attacks of each fighter, both the player and enemy.
+                                        case 1 -> { // the normal attacks of the player
+                                            classes.get(enemyChoice).dealDamage(player.getName(), player.getAttack(), value);
+                                            player.dealDamage(classes.get(enemyChoice).getName(), classes.get(enemyChoice).getSpecialAttack(), value);
+                                            report = classes.get(enemyChoice).winCondition(player.getHealth(), classes.get(enemyChoice).getHealth());
+                                            classes.get(enemyChoice).matchEnd(report);
+                                            player.matchEnd(report);
+                                            player.currentMatch(player.getName(), player.getHealth(), classes.get(enemyChoice).getName(), classes.get(enemyChoice).getHealth());
+                                        }
+                                        case 2 -> { // the special attacks of the player
+                                            classes.get(enemyChoice).dealDamage(player.getName(), player.getSpecialAttack(), value);
+                                            player.dealDamage(classes.get(enemyChoice).getName(), classes.get(enemyChoice).getSpecialAttack(), value);
+                                            report = classes.get(enemyChoice).winCondition(player.getHealth(), classes.get(enemyChoice).getHealth());
+                                            classes.get(enemyChoice).matchEnd(report);
+                                            player.matchEnd(report);
+                                            player.currentMatch(player.getName(), player.getHealth(), classes.get(enemyChoice).getName(), classes.get(enemyChoice).getHealth());
+                                        }
+                                    }
+                                }catch(Exception e){
+                                    System.out.println("Try again, choose one of the options listed above.");
+                                }
                             }
                         }
+                        case 2 -> { // case for ending the fight, I will code further enabling you to return to the 'main menu' but for now this is all.
+                            System.out.println("Goodbye!");
+                            fight = false;
+                        }
                     }
-                }
-                case 2 -> { // case for ending the fight, I will code further enabling you to return to the 'main menu' but for now this is all.
-                    System.out.println("Embarrassing!");
-                    game = false;
+                }catch(Exception e){
+                    System.out.println("Try again, choose one of the options listed above.");
+                    fight = false;
                 }
             }
+        }catch(Exception e){
+            System.out.println("Try again, choose one of the options listed above.");
         }
     }
 }

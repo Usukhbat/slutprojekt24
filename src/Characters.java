@@ -5,15 +5,13 @@ public class Characters {        // this is the class where I have most of the i
     private final int defense;
     private final int specialAttack;
     private final int specialDefense;
-    private final int speed;
-    public Characters(String name, int health, int attack, int defense, int specialAttack, int specialDefense, int speed){
+    public Characters(String name, int health, int attack, int defense, int specialAttack, int specialDefense){
         this.name = name;
         this.health = health;
         this.attack = attack;
         this.defense = defense;
         this.specialAttack = specialAttack;
         this.specialDefense = specialDefense;
-        this.speed = speed;
     }
     public String getName(){ return name; } // the typical getter methods are used here.
     public int getHealth(){ return health; }
@@ -29,9 +27,6 @@ public class Characters {        // this is the class where I have most of the i
     public int getSpecialDefense(){
         return specialDefense;
     }
-    public int getSpeed(){
-        return speed;
-    }
     public void warCry(){
         System.out.println("Hello!");
     }
@@ -42,7 +37,6 @@ public class Characters {        // this is the class where I have most of the i
         System.out.println("Defense: "+this.defense);
         System.out.println("Special Attack: "+this.specialAttack);
         System.out.println("Special Defense: "+this.specialDefense);
-        System.out.println("Speed: "+this.speed);
     }
     public void dealDamage(String name, int damage, int value){ // the method used to calculate the amount of damage dealt, will be more complicated in the future.
         int totalDamage = damage+value;
