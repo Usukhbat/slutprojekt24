@@ -1,6 +1,4 @@
-import java.util.Random;
-
-public class Characters {        // this is the class where i have most of the important methods connected to the objects in Arena.java.
+public class Characters {        // this is the class where I have most of the important methods connected to the objects in Arena.java.
     private final String name;
     private int health;
     private final int attack;
@@ -34,7 +32,7 @@ public class Characters {        // this is the class where i have most of the i
     public int getSpeed(){
         return speed;
     }
-    public void makeNoise(){
+    public void warCry(){
         System.out.println("Hello!");
     }
     public void showStats(){                    // a simple method using abusing "this" to show the stats (attributes) of an object.
