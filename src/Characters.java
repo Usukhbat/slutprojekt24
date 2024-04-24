@@ -38,10 +38,9 @@ public class Characters {        // this is the class where I have most of the i
         System.out.println("Special Attack: "+this.specialAttack);
         System.out.println("Special Defense: "+this.specialDefense);
     }
-    public void dealDamage(String name, int damage, int value){ // the method used to calculate the amount of damage dealt, will be more complicated in the future.
-        int totalDamage = damage+value;
-        this.health = this.health-totalDamage;
-        System.out.println(name+" dealt -"+totalDamage);
+    public void dealDamage(String name, int damage){ // the method used to calculate the amount of damage dealt, will be more complicated in the future.
+        this.health = this.health-damage;
+        System.out.println(name+" dealt -"+damage);
     }
     public void currentMatch(String playerName, int playerHealth, String enemyName, int enemyHealth){ // method to show current health of both fighters.
         System.out.println(playerName+": "+playerHealth);
