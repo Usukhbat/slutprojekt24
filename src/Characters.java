@@ -38,27 +38,9 @@ public class Characters {        // this is the class where I have most of the i
         System.out.println("Special Attack: "+this.specialAttack);
         System.out.println("Special Defense: "+this.specialDefense);
     }
-    public void dealDamage(String name, int damage){ // the method used to calculate the amount of damage dealt, will be more complicated in the future.
-        this.health = this.health-damage;
-        System.out.println(name+" dealt -"+damage);
-    }
-    public void currentMatch(String playerName, int playerHealth, String enemyName, int enemyHealth){ // method to show current health of both fighters.
-        System.out.println(playerName+": "+playerHealth);
-        System.out.println(enemyName+": "+enemyHealth);
-    }
-    public void matchEnd(int report){  // method sends a message in case someone's health reaches zero.
-        if (report == 1 || report == 2) {
-            System.out.println(this.name + " won!");
-        }
-    }
-    public int winCondition(int playerHealth, int enemyHealth) { // checks if somebody's health has reached zero or not
-        int message = 0;
-        if (playerHealth <= 0 && enemyHealth >= 0) {
-            message = 1;
-        }
-        if (playerHealth >= 0 && enemyHealth <= 0){
-            message = 2;
-        }
-        return message;
+    public void fight(int damage){
+        damage = (damage+this.defense)/2;
+        System.out.println("You dealt "+damage+"Hp!");
+        this.health -= damage;
     }
 }
